@@ -1,0 +1,64 @@
+#:import FadeTransition kivy.uix.screenmanager.FadeTransition
+<ScreenManager>:
+	pro:pro
+	codigo:codigo
+	costo:costo
+	busquedad:busquedad
+	producto:""
+	precio: ""
+	transition: FadeTransition()
+	Screen:	
+		name: 'ingreso'
+		canvas:
+	        Color:
+	            rgba: 0.2, 0.7, 0.9, 0.2
+	        Rectangle:
+	            pos: self.pos
+	            size: self.size  
+		BoxLayout:
+			orientation: 'vertical'
+			Label:
+				text: 'SUPERMERCADO HOTAN'
+			GridLayout:
+				cols: 1
+				Label:
+					text: 'PRODUCTO'
+				TextInput:
+					id: pro
+				Label:
+					text: 'CODIGO DE BARRA'
+				TextInput:
+					id: codigo
+				Label:
+					text: 'PRECIO'
+				TextInput:
+					id: costo
+			Button:
+				text: 'GUARDAR'
+				on_release: 
+					root.current=('buscar')
+					root.save()
+	Screen:
+		name: 'buscar'
+		canvas:
+	        Color:
+	            rgba: 0, 0, 0, 0
+	        Rectangle:
+	            pos: self.pos
+	            size: self.size
+	    GridLayout:
+	    	cols: 2	  
+			Button:
+				text: 'INGRESE EL CODIGO DE BARRA \n PRESIONE PARA BUSCAR'
+				on_press: root.buscando()
+			TextInput:	
+				id: busquedad		
+			TextInput:
+				text: "Producto: \n"+root.producto
+				disabled: True
+			TextInput:					
+				text: "Precio: \n"+root.precio
+				disabled: True
+			Button:
+				text: 'AGREGAR OTRO PRODUCTO'
+				on_press: root.current=('ingreso')
